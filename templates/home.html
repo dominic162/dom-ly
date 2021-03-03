@@ -44,8 +44,8 @@
 </div>
 {% if success %}
 <div class="alert alert-success alert-dismissible fade show" role="alert">
-    <p>Your link has been shortened to <a href="{{shorturl}}" target="_blank">localhost:8000/{{shorturl}}</a> .<button class="btn" 
-        data-bs-toggle="modal" data-bs-target="#exampleModal"            data-clipboard-text="localhost:8000/{{shorturl}}">
+    <p>Your link has been shortened to <a href="{{shorturl}}" target="_blank">dom-ly.herokuapp.com/{{shorturl}}</a> .<button class="btn" 
+        data-bs-toggle="modal" data-bs-target="#exampleModal"            data-clipboard-text="dom-ly.herokuapp.com/{{shorturl}}">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-clipboard"
                 viewBox="0 0 16 16">
                 <path
@@ -77,9 +77,5 @@
 <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js"></script>
 <script>
     new ClipboardJS('.btn');
-    var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
-    var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
-    return new bootstrap.Popover(popoverTriggerEl)
-    })
 </script>
 {% endblock %}
