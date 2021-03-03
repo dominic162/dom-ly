@@ -1,0 +1,1 @@
+web: gunicorn dom_ly.wsgi --log-file -

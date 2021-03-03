@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% block title%}
+<title>
+    Home
+</title>
+{% endblock %}
+
+{% block navlink %}
+<div style="float: right;">
+    <a href="{% url 'logout' %}">
+        <button type="button" class="btn btn-outline-dark">Logout</button>
+    </a>
+</div>
+{% endblock%}
+
+{% block content %}
+<div class="container">
+    <form action="" method="POST" style="margin: 30px 10px;">
+        {% csrf_token %}
+        <div class="form-floating mb-4">
+            <input type="text" class="form-control" placeholder="Enter Url to shorten" name="originalurl"
+                id="originalurl">
+            <label for="originalurl">Original Url</label>
+        </div>
+        <div class="row">
+            <div class="col-auto mb-3">
+                <button type="button" class="btn btn-secondary btn-lg" disabled>localhost:8000/</button>
+            </div>
+            <div class="col-8 form-floating mb-3">
+                <input type="text" class="form-control" id="floatingInput2" placeholder="Enter custom  url"
+                    name="shorturl" id="shorturl">
+                <label for="shorturl" style="margin-left: 10px;">Enter custom url</label>
+                <span class="form-text mb-2">
+                    Leave blank to generate randomly.
+                </span>
+            </div>
+        </div>
+        <div>
+            <button type="submit" class="btn btn-success mb-3" name="generate">
+                Generate
+            </button>
+        </div>
+    </form>
+</div>
+{% if success %}
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    <p>Your link has been shortened to <a href="{{shorturl}}" target="_blank">localhost:8000/{{shorturl}}</a> .<button class="btn" 
+        data-bs-toggle="modal" data-bs-target="#exampleModal"            data-clipboard-text="localhost:8000/{{shorturl}}">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-clipboard"
+                viewBox="0 0 16 16">
+                <path
+                    d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z" />
+                <path
+                    d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z" />
+            </svg></button> </p>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Customized url copied!</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endif %}
+{% if error %}
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+    {{error}}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+{% endif %}
+{% endblock %}
+{% block script %}
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js"></script>
+<script>
+    new ClipboardJS('.btn');
+    var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+    var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+    return new bootstrap.Popover(popoverTriggerEl)
+    })
+</script>
+{% endblock %}

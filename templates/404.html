@@ -1,0 +1,50 @@
+{%extends 'base.html'%}
+{% block title %}
+    <title>
+        404-Page not found
+    </title>
+{% endblock %}
+{% block style %}
+<style>
+    .container h1,
+    .container p {
+        font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        font-size: 50px;
+        font-weight: 600;
+    }
+    .container p + p{
+        font-size: 25px;
+    }
+    .anim1 {
+        animation: error 2s infinite;
+    }
+
+    @keyframes error {
+        50% {
+            transform: scale(1.25, 1.25);
+        }
+
+        100% {
+            transform: scale(1, 1);
+        }
+    }
+</style>
+{% endblock %}
+{% block content %}
+{% load static %}
+<div class="container">
+    <div class="row my-2 " style="height: 80vh; justify-content: space-around; align-items: center;">
+        <div class="col-md-5 my-3 mx-3" >
+            <h1>OOPS...</h1>
+            <p>404-Page Not Found</p>
+            <p>Make sure you wrote the url correctly.<span>&#128522;</span></p>
+            <p>Click to go to <a href="{% url 'dashboard' %}">home</a></p>
+            
+        </div>
+
+        <div class="col-md-4" style="margin-left: 30px;">
+            <img src="{% static '4041.jpg' %}" class="img-fluid" alt="Responsive image">
+        </div>
+    </div>
+</div>
+{% endblock %}

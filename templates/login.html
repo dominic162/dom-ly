@@ -1,0 +1,103 @@
+{% include 'base.html' %}
+{% block title %}
+<title>
+  Authentication
+</title>
+{% endblock %}
+
+{% block style %}
+  <style>
+    .form-floating{
+      margin: 5px 5px;
+    }
+
+    .btn{
+      margin: 5px 5px;
+    }
+    
+    h3{
+      margin: 10px 5px;
+      color: rgb(70, 54, 161);
+    }
+
+    .ctr{
+      text-align: center;
+    }
+
+    input{
+      font-weight: 600;
+    }
+
+  </style>
+{% endblock %}
+
+
+
+{% block content %}
+{% load static %}
+{% if error %}
+  <div class="alert alert-danger alert-dismissible fade show" role="alert">
+    {{error}}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+{% endif %}
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <img  src="{% static 'login.svg' %}" style="width: 100%; height: 100%; min-width: 320px;  margin: 5px 5px;" alt="login image">
+    </div>
+    <div class="col">
+      <form action="" method="POST" style="margin: 5px 10px;">
+        {% csrf_token %}
+        <h3>Login:</h3>
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com" name="username">
+          <label for="floatingInput">Username</label>
+          <span id="passwordHelpInline1" class="form-text">
+            Username must be 6-20 characters long.
+          </span>
+        </div>
+        <div class="form-floating">
+          <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password">
+          <label for="floatingPassword">Password</label>
+          <span id="passwordHelpInline" class="form-text">
+            Password must be 8-20 characters long.
+          </span>
+        </div>
+        
+        <div >
+            <button type="submit" class="btn btn-success" name="login" value="1">
+              Login
+            </button>
+        </div>
+        <h3 class="ctr">OR</h3>
+        <h3>Signup:</h3>
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com" name="susername">
+          <label for="floatingInput">Username</label>
+          <span id="passwordHelpInline1" class="form-text">
+            Username must be 4-20 characters long.
+          </span>
+        </div>
+        <div class="form-floating">
+          <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="spassword">
+          <label for="floatingPassword">Password</label>
+          <span id="passwordHelpInline" class="form-text">
+            Password must be 8-20 characters long.
+          </span>
+        </div>
+        <div class="form-floating">
+          <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="cpassword">
+          <label for="floatingPassword">Confirm Password</label>
+        </div>
+        
+        <div >
+            <button type="submit" class="btn btn-success" name="signup" value="1">
+              Signup
+            </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
