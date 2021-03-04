@@ -5,25 +5,20 @@
 </title>
 {% endblock %}
 
-{% block navlink %}
-<div style="float: right;">
-    <a href="{% url 'logout' %}">
-        <button type="button" class="btn btn-outline-dark">Logout</button>
-    </a>
-</div>
-{% endblock%}
+
 
 {% block content %}
 <div class="container">
     <div style="margin: 10px 5px;">
-        <h3>Shorten the long urls.</h3>
+        <h2>DOMLY- Shorten the extended urls.</h3>
     </div>
-    <form action="" method="POST" style="margin: 30px 10px;">
+    <form action="" method="POST" style="margin: 30px 20px;">
+
         {% csrf_token %}
         <div class="form-floating mb-4">
             <input type="text" class="form-control" placeholder="Enter Url to shorten" name="originalurl"
                 id="originalurl">
-            <label for="originalurl">Original Url</label>
+            <label for="originalurl">Enter Url</label>
         </div>
         <div class="row">
             <div class="col-auto mb-3">
@@ -39,16 +34,26 @@
             </div>
         </div>
         <div>
+            {% if request.user.is_authenticated %}
             <button type="submit" class="btn btn-success mb-3" name="generate">
-                Generate
+                Shorten
             </button>
+            {% else %}
+            <button class="btn btn-secondary mb-3" disabled>
+                Shorten
+            </button><span class="form-text mb-2">
+                Login first to shorten links.
+            </span>
+            {% endif %}
         </div>
+
     </form>
 </div>
 {% if success %}
 <div class="alert alert-success alert-dismissible fade show" role="alert">
-    <p>Your link has been shortened to <a href="{{shorturl}}" target="_blank">dom-ly.herokuapp.com/{{shorturl}}</a> .<button class="btn" 
-        data-bs-toggle="modal" data-bs-target="#exampleModal"            data-clipboard-text="dom-ly.herokuapp.com/{{shorturl}}">
+    <p>Your link has been shortened to <a href="{{shorturl}}" target="_blank">dom-ly.herokuapp.com/{{shorturl}}</a>
+        .<button class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal"
+            data-clipboard-text="dom-ly.herokuapp.com/{{shorturl}}">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-clipboard"
                 viewBox="0 0 16 16">
                 <path
@@ -60,20 +65,20 @@
 </div>
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Customized url copied!</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Customized url copied!</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
+</div>
 {% endif %}
 {% if error %}
 <div class="alert alert-danger alert-dismissible fade show" role="alert">
     {{error}}
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-  </div>
+</div>
 {% endif %}
 {% endblock %}
 {% block script %}

@@ -9,7 +9,6 @@ def short():
     letters=string.ascii_lowercase
     return(''.join(random.choice(letters) for i in range(6)))
 
-@login_required(login_url='/login')
 def dashboard(request):
     context={
         'form':forms.urlmanipulate(),
@@ -52,5 +51,3 @@ def redr(request,query=None):
     url_to_go=check.original_url
     return HttpResponseRedirect(url_to_go)
 
-def error404(request):
-    return render(request,'404.html')
